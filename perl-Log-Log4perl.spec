@@ -4,16 +4,17 @@
 #
 Name     : perl-Log-Log4perl
 Version  : 1.49
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/M/MS/MSCHILLI/Log-Log4perl-1.49.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MS/MSCHILLI/Log-Log4perl-1.49.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libl/liblog-log4perl-perl/liblog-log4perl-perl_1.49-1.debian.tar.xz
 Summary  : 'Log4j implementation for Perl'
 Group    : Development/Tools
 License  : Artistic-1.0 GPL-1.0
-Requires: perl-Log-Log4perl-bin
-Requires: perl-Log-Log4perl-license
-Requires: perl-Log-Log4perl-man
+Requires: perl-Log-Log4perl-bin = %{version}-%{release}
+Requires: perl-Log-Log4perl-license = %{version}-%{release}
+Requires: perl-Log-Log4perl-man = %{version}-%{release}
+BuildRequires : buildreq-cpan
 
 %description
 ######################################################################
@@ -23,11 +24,21 @@ Log::Log4perl 1.49
 %package bin
 Summary: bin components for the perl-Log-Log4perl package.
 Group: Binaries
-Requires: perl-Log-Log4perl-license
-Requires: perl-Log-Log4perl-man
+Requires: perl-Log-Log4perl-license = %{version}-%{release}
+Requires: perl-Log-Log4perl-man = %{version}-%{release}
 
 %description bin
 bin components for the perl-Log-Log4perl package.
+
+
+%package dev
+Summary: dev components for the perl-Log-Log4perl package.
+Group: Development
+Requires: perl-Log-Log4perl-bin = %{version}-%{release}
+Provides: perl-Log-Log4perl-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-Log-Log4perl package.
 
 
 %package license
@@ -47,10 +58,10 @@ man components for the perl-Log-Log4perl package.
 
 
 %prep
-tar -xf %{SOURCE1}
-cd ..
 %setup -q -n Log-Log4perl-1.49
-mkdir -p %{_topdir}/BUILD/Log-Log4perl-1.49/deblicense/
+cd ..
+%setup -q -T -D -n Log-Log4perl-1.49 -b 1
+mkdir -p deblicense/
 mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Log-Log4perl-1.49/deblicense/
 
 %build
@@ -75,12 +86,13 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/perl-Log-Log4perl
-cp LICENSE %{buildroot}/usr/share/doc/perl-Log-Log4perl/LICENSE
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-Log-Log4perl
+cp LICENSE %{buildroot}/usr/share/package-licenses/perl-Log-Log4perl/LICENSE
+cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Log-Log4perl/deblicense_copyright
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -89,69 +101,64 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Appender.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Appender/Buffer.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Appender/DBI.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Appender/File.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Appender/Limit.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Appender/RRDs.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Appender/Screen.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Appender/ScreenColoredLevels.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Appender/Socket.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Appender/String.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Appender/Synchronized.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Appender/TestArrayBuffer.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Appender/TestBuffer.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Appender/TestFileCreeper.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Catalyst.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Config.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Config/BaseConfigurator.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Config/DOMConfigurator.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Config/PropertyConfigurator.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Config/Watch.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/DateFormat.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/FAQ.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Filter.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Filter/Boolean.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Filter/LevelMatch.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Filter/LevelRange.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Filter/MDC.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Filter/StringMatch.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/InternalDebug.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/JavaMap.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/JavaMap/ConsoleAppender.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/JavaMap/FileAppender.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/JavaMap/JDBCAppender.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/JavaMap/NTEventLogAppender.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/JavaMap/RollingFileAppender.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/JavaMap/SyslogAppender.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/JavaMap/TestBuffer.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Layout.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Layout/NoopLayout.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Layout/PatternLayout.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Layout/PatternLayout/Multiline.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Layout/SimpleLayout.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Level.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Logger.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/MDC.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/NDC.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Resurrector.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Util.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Util/Semaphore.pm
-/usr/lib/perl5/site_perl/5.26.1/Log/Log4perl/Util/TimeTracker.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Appender.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Appender/Buffer.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Appender/DBI.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Appender/File.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Appender/Limit.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Appender/RRDs.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Appender/Screen.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Appender/ScreenColoredLevels.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Appender/Socket.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Appender/String.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Appender/Synchronized.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Appender/TestArrayBuffer.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Appender/TestBuffer.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Appender/TestFileCreeper.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Catalyst.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Config.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Config/BaseConfigurator.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Config/DOMConfigurator.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Config/PropertyConfigurator.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Config/Watch.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/DateFormat.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/FAQ.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Filter.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Filter/Boolean.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Filter/LevelMatch.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Filter/LevelRange.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Filter/MDC.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Filter/StringMatch.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/InternalDebug.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/JavaMap.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/JavaMap/ConsoleAppender.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/JavaMap/FileAppender.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/JavaMap/JDBCAppender.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/JavaMap/NTEventLogAppender.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/JavaMap/RollingFileAppender.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/JavaMap/SyslogAppender.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/JavaMap/TestBuffer.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Layout.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Layout/NoopLayout.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Layout/PatternLayout.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Layout/PatternLayout/Multiline.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Layout/SimpleLayout.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Level.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Logger.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/MDC.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/NDC.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Resurrector.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Util.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Util/Semaphore.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Log/Log4perl/Util/TimeTracker.pm
 
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/l4p-tmpl
 
-%files license
+%files dev
 %defattr(-,root,root,-)
-/usr/share/doc/perl-Log-Log4perl/LICENSE
-
-%files man
-%defattr(-,root,root,-)
-/usr/share/man/man1/l4p-tmpl.1
 /usr/share/man/man3/Log::Log4perl.3
 /usr/share/man/man3/Log::Log4perl::Appender.3
 /usr/share/man/man3/Log::Log4perl::Appender::Buffer.3
@@ -203,3 +210,12 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 /usr/share/man/man3/Log::Log4perl::Util.3
 /usr/share/man/man3/Log::Log4perl::Util::Semaphore.3
 /usr/share/man/man3/Log::Log4perl::Util::TimeTracker.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-Log-Log4perl/LICENSE
+/usr/share/package-licenses/perl-Log-Log4perl/deblicense_copyright
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/l4p-tmpl.1
