@@ -4,11 +4,11 @@
 #
 Name     : perl-Log-Log4perl
 Version  : 1.49
-Release  : 10
+Release  : 11
 URL      : https://cpan.metacpan.org/authors/id/M/MS/MSCHILLI/Log-Log4perl-1.49.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MS/MSCHILLI/Log-Log4perl-1.49.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libl/liblog-log4perl-perl/liblog-log4perl-perl_1.49-1.debian.tar.xz
-Summary  : 'Log4j implementation for Perl'
+Summary  : Log4j implementation for Perl
 Group    : Development/Tools
 License  : Artistic-1.0 GPL-1.0
 Requires: perl-Log-Log4perl-bin = %{version}-%{release}
@@ -25,7 +25,6 @@ Log::Log4perl 1.49
 Summary: bin components for the perl-Log-Log4perl package.
 Group: Binaries
 Requires: perl-Log-Log4perl-license = %{version}-%{release}
-Requires: perl-Log-Log4perl-man = %{version}-%{release}
 
 %description bin
 bin components for the perl-Log-Log4perl package.
@@ -36,6 +35,7 @@ Summary: dev components for the perl-Log-Log4perl package.
 Group: Development
 Requires: perl-Log-Log4perl-bin = %{version}-%{release}
 Provides: perl-Log-Log4perl-devel = %{version}-%{release}
+Requires: perl-Log-Log4perl = %{version}-%{release}
 
 %description dev
 dev components for the perl-Log-Log4perl package.
@@ -62,7 +62,7 @@ man components for the perl-Log-Log4perl package.
 cd ..
 %setup -q -T -D -n Log-Log4perl-1.49 -b 1
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Log-Log4perl-1.49/deblicense/
+cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Log-Log4perl-1.49/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
