@@ -4,7 +4,7 @@
 #
 Name     : perl-Log-Log4perl
 Version  : 1.54
-Release  : 26
+Release  : 27
 URL      : https://cpan.metacpan.org/authors/id/E/ET/ETJ/Log-Log4perl-1.54.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/E/ET/ETJ/Log-Log4perl-1.54.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libl/liblog-log4perl-perl/liblog-log4perl-perl_1.49-1.debian.tar.xz
