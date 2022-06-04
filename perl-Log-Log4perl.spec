@@ -4,7 +4,7 @@
 #
 Name     : perl-Log-Log4perl
 Version  : 1.55
-Release  : 28
+Release  : 29
 URL      : https://cpan.metacpan.org/authors/id/E/ET/ETJ/Log-Log4perl-1.55.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/E/ET/ETJ/Log-Log4perl-1.55.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libl/liblog-log4perl-perl/liblog-log4perl-perl_1.49-1.debian.tar.xz
@@ -184,54 +184,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Appender.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Appender/Buffer.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Appender/DBI.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Appender/File.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Appender/Limit.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Appender/RRDs.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Appender/Screen.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Appender/ScreenColoredLevels.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Appender/Socket.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Appender/String.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Appender/Synchronized.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Appender/TestArrayBuffer.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Appender/TestBuffer.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Appender/TestFileCreeper.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Catalyst.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Config.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Config/BaseConfigurator.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Config/DOMConfigurator.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Config/PropertyConfigurator.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Config/Watch.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/DateFormat.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/FAQ.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Filter.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Filter/Boolean.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Filter/LevelMatch.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Filter/LevelRange.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Filter/MDC.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Filter/StringMatch.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/InternalDebug.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/JavaMap.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/JavaMap/ConsoleAppender.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/JavaMap/FileAppender.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/JavaMap/JDBCAppender.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/JavaMap/NTEventLogAppender.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/JavaMap/RollingFileAppender.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/JavaMap/SyslogAppender.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/JavaMap/TestBuffer.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Layout.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Layout/NoopLayout.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Layout/PatternLayout.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Layout/PatternLayout/Multiline.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Layout/SimpleLayout.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Level.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Logger.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/MDC.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/NDC.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Resurrector.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Util.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Util/Semaphore.pm
-/usr/lib/perl5/vendor_perl/5.34.0/Log/Log4perl/Util/TimeTracker.pm
+/usr/lib/perl5/*
